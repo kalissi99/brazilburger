@@ -42,7 +42,7 @@
     <header>
     
 
-
+<?php echo $_SESSION['user_id'];?>
 
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid my-5">

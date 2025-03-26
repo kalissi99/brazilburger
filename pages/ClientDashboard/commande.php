@@ -1,11 +1,12 @@
 <?php
 
 
-$connexion = mysqli_connect("localhost", "root", "", "brazil_burger");
+
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../login.php");
+     header("Location: ../../login.php");
+   // echo "<script>window.location.href = '../../login.php</script>";
     exit();
 }
 
@@ -55,10 +56,10 @@ $complements = mysqli_query($connexion, $sqlComplement);
             <div class="card">
                 <img src="<?= $produit['image'] ?>" alt="Image du produit" style="width:200px;">
                 <h3><?= ($type === 'burger') ? $produit['nom_burger'] : $produit['nom_menu'] ?></h3>
-                <p><strong>Prix :</strong> <?= $produit['prix'] ?> €</p>
+                <p><strong>Prix :</strong> <?= $produit['prix'] ?> Fcfa</p>
             </div>
 
-            <form action="pages/ClientDashboard/process_commande.php" method="POST">
+            <form action="./pages/ClientDashboard/process_commande.php" method="POST">
                 <input type="hidden" name="type" value="<?= $type ?>">
                 <input type="hidden" name="produit_id" value="<?= $id ?>">
                 <input type="hidden" name="prix_unitaire" value="<?= $produit['prix'] ?>">
@@ -72,7 +73,7 @@ $complements = mysqli_query($connexion, $sqlComplement);
                     <select name="complement_id">
                         <option value="">Aucun</option>
                         <?php while ($comp = mysqli_fetch_assoc($complements)) { ?>
-                            <option value="<?= $comp['id'] ?>"><?= $comp['nom_complement'] ?> (+<?= $comp['prix'] ?>€)</option>
+                            <option value="<?= $comp['id'] ?>"><?= $comp['nom_complement'] ?> (+<?= $comp['prix'] ?>Fcfa)</option>
                         <?php } ?>
                     </select>
                 <?php } ?>

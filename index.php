@@ -23,13 +23,13 @@ require_once 'database.php';
 session_start();
 if (isset($_GET['action']) && !empty($_SESSION)) {
     // Si le rôle est "client" et l'action n'est pas autorisée, rediriger vers "pageAccueil"
-    if ($_SESSION['role'] == 'client' && !in_array($_GET['action'], ['changingPassword', 'listMenu', 'listCommande', 'listBurger', 'pageAccueil', 'maCommande','commande'])) {
+    if ($_SESSION['role'] == 'client' && !in_array($_GET['action'], ['changingPassword', 'listMenu', 'listCommande', 'listBurger', 'pageAccueil', 'maCommande','commande','seDeconnecter',])) {
         header('Location: index.php?action=pageAccueil');
         exit;
     }
 
     // Inclure la barre de navigation uniquement si l'action n'est pas "changingPassword"
-    if ($_GET['action'] != "changingPassword") {
+    if ($_GET['action'] != "changingPassword" && $_GET['action'] != "Statistique") {
         if ($_SESSION['role'] != 'client') {
             require_once './shared/navbar.php';
         } else {
@@ -60,8 +60,9 @@ if (isset($_GET['action']) && !empty($_SESSION)) {
         if ($_GET['action'] == "commande") {
             // Si le rôle est "client", charger la page spécifique
             if ($_SESSION['role'] == 'client') {
-             require_once './pages/ClientDashboard/commande.php';
-    }
+              require_once './pages/ClientDashboard/commande.php';
+             //echo "<script>window.location.href = './pages/ClientDashboard/commande.php';</script>";
+    }   
             }
     
 
@@ -111,13 +112,20 @@ if (isset($_GET['action']) && !empty($_SESSION)) {
     if ($_GET['action'] == "listComplement") {
         require_once './pages/complements/list.php';
     }
-
+  if ($_GET['action'] == "Statistique") {
+        require_once './pages/Statistiques/stat.php';
+    }
+    
+       
     if ($_GET['action'] == "addRole") {
         require_once './pages/role/add.php';
     }
 
     if ($_GET['action'] == "addMenu") {
         require_once './pages/menu/add.php';
+    }
+    if ($_GET['action'] == "listCommande") {
+        require_once './pages/commande/list.php';
     }
 
     if ($_GET['action'] == "updateUser") {
@@ -128,6 +136,7 @@ if (isset($_GET['action']) && !empty($_SESSION)) {
         $roles = mysqli_query($connexion, $sql);
         require_once './pages/users/edit.php';
     }
+    
 
     if ($_GET['action'] == "addBurger") {
         require_once './pages/burger/add.php';

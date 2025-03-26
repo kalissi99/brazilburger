@@ -2,6 +2,7 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     // Vérifier si l'utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
         die("Erreur : L'utilisateur n'est pas connecté.");
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_SESSION['user_id'];
 
     // Vérifier que cet utilisateur existe bien dans la base
-    $query = "SELECT id FROM user WHERE id = $user_id";
+    $query = "SELECT id FROM user WHERE id= $user_id";
     $result = mysqli_query($connexion, $query);
 
     if (mysqli_num_rows($result) == 0) {

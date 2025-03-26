@@ -21,10 +21,13 @@ $complement = mysqli_query($connexion,$sqlComplement);
                     <div class="card-body">
                         <h5 class="card-title"><?= $row['nom_burger'] ?></h5>
                        
-                        <p class="card-text"><strong>Prix :</strong> <?= $row['prix'] ?> €</p>
+                        <p class="card-text"><strong>Prix :</strong> <?= $row['prix'] ?> Fcfa</p>
                         <p class="card-text"><strong>Description :</strong> <?= $row['description'] ?></p>
-                        <a class="btn btn-primary" href="index.php?action=commande&type=burger&id=<?= $row['id'] ?>">
+                        <!-- ✅ Correction : utiliser <a> -->
+<a class="btn btn-primary" href='index.php?action=commande&type=burger&id=<?= $row['id'] ?>'>
     <i class="bi bi-cart-plus"></i> 
+</a>
+    
 </a>
   </div>
             </div>
